@@ -8,9 +8,6 @@ import { RectButton, TouchableOpacity } from 'react-native-gesture-handler';
 import { useRoute } from '@react-navigation/native';
 
 import * as Location from 'expo-location';
-import * as Permissions from 'expo-permissions';
-
-// import { Location, Permissions } from 'expo';
 
 import api from '../services/api';
 
@@ -47,25 +44,20 @@ export default function OrphanageDetails() {
   }, [params.id]);
 
   const getLocationAsync = async () => {
-  
-    // let { status } = await Location.askAsync(Permissions.LOCATION);
-    let { status } = await Location.requestPermissionsAsync();
-
-    if (status !== 'granted') {
-      alert("Precisamos de sua localização para definir uma rota até o orfanato!!");
-      setCurrentPosition({ latitude: -22.824236, longitude: -47.270097 });
-      return;
-    } else { 
-      let location = await Location.getCurrentPositionAsync();
-      let { latitude, longitude } =  location.coords;
-      setCurrentPosition({ latitude, longitude });
-      return;
-    }
-
-    // navigator.geolocation.getCurrentPosition(position => {
-    //   const { latitude, longitude } = position.coords;
-    //   setCurrentPosition({ latitude, longitude });
-    // });
+    await Location.requestPermissionsAsync()
+      .then(async resp => {
+        // console.log(resp);
+        let location = await Location.getCurrentPositionAsync();
+        let { latitude, longitude } =  location.coords;
+        setCurrentPosition({ latitude, longitude });
+        return;
+      })
+      .catch(err => {
+        // console.log(err);
+        alert("Precisamos de sua localização para definir uma rota até o orfanato!!");
+        setCurrentPosition({ latitude: -22.824236, longitude: -47.270097 });
+        return;
+      })
    }
 
   const handleOpenGooleMapsRoute = () => {

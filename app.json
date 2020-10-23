@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Happy_App",
-    "slug": "Happy_App",
-    "version": "1.0.0",
+    "name": "Happy App",
+    "slug": "happy_paulo_app",
+    "version": "2.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -17,9 +17,11 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "host.paulopkl.happyapp"
     },
     "android": {
+      "package": "com.paulopkl.happy_app",
       "permissions": ["ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION"],
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",

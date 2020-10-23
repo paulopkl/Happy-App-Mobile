@@ -21,6 +21,7 @@ interface Orphanage {
   latitude: number;
   longitude: number;
   about: string;
+  whatsapp: string;
   instructions: string;
   description: string;
   opening_hours: string;
@@ -31,6 +32,8 @@ interface Orphanage {
   }>
 }
 
+const mensagem = "Boa tarde gostária de saber qual o melhor horário para eu fazer uma visita?";
+
 export default function OrphanageDetails() {
   const route = useRoute();
   const [orphanage, setOrphanage] = useState<Orphanage>();
@@ -39,21 +42,25 @@ export default function OrphanageDetails() {
   const params = route.params as OrphanageDetailsRouteParams;
 
   useEffect(() => {
-    api.get(`orphanages/${params.id}`).then((response: any) => { setOrphanage(response.data); });
+    api.get(`orphanages/${params.id}`)
+      .then((response: any) => { 
+        setOrphanage(response.data); 
+      })
+      .catch(err => {
+        alert('Erro ao puxar dados da API!');
+      })
     getLocationAsync();
   }, [params.id]);
 
   const getLocationAsync = async () => {
     await Location.requestPermissionsAsync()
       .then(async resp => {
-        // console.log(resp);
         let location = await Location.getCurrentPositionAsync();
         let { latitude, longitude } =  location.coords;
         setCurrentPosition({ latitude, longitude });
         return;
       })
       .catch(err => {
-        // console.log(err);
         alert("Precisamos de sua localização para definir uma rota até o orfanato!!");
         setCurrentPosition({ latitude: -22.824236, longitude: -47.270097 });
         return;
@@ -80,7 +87,6 @@ export default function OrphanageDetails() {
             const imageUrl = image.url.slice(0, 21) === 'http://localhost:3333' 
               ? image.url.slice(21) 
               : image.url.slice(39);
-            console.log(imageUrl);
             return (
               <Image 
                 key={image.id} 
@@ -153,9 +159,12 @@ export default function OrphanageDetails() {
             
         </View>
 
-        <RectButton style={styles.contactButton} onPress={() => {}}>
-          <FontAwesome name="whatsapp" size={24} color="#FFF" />
-          <Text style={styles.contactButtonText}>Entrar em contato</Text>
+        <RectButton 
+          style={styles.contactButton} onPress={() => {
+            Linking.openURL(`whatsapp://send?text=${mensagem}&phone=55${+orphanage.whatsapp}`)
+        }}>
+            <FontAwesome name="whatsapp" size={24} color="#FFF" />
+            <Text style={styles.contactButtonText}>Entrar em contato</Text>
         </RectButton>
       </View>
     </ScrollView>

@@ -21,9 +21,9 @@ export default function Routes() {
           headerShown: false, 
           cardStyle: { backgroundColor: '#F2F3F5' }
         }}>
+        <Screen name="Onboarding1" component={Onboarding1} options={{ headerShown: false }} />
+        <Screen name="Onboarding2" component={Onboarding2} options={{ headerShown: false }} />
         <Screen name="OrphanagesMap" component={OrphanagesMap} />
-        <Screen name="Onboarding1" component={Onboarding1} options={{ headerShown: true }} />
-        <Screen name="Onboarding2" component={Onboarding2} options={{ headerShown: true }} />
         <Screen name="SelectMapPosition" component={SelectMapPosition} options={{ headerShown: true,
           header: props => <Header title="Selecione no mapa" {...props} /> }} />
         <Screen name="OrphanageData" component={OrphanageData}options={{ headerShown: true,

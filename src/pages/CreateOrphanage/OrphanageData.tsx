@@ -28,13 +28,14 @@ export default function OrphanageData() {
   const params = route.params as OrphanageDataRouteParams;
   const position = params.position;
 
-  function handleCreateOrphanage() {
+  const handleCreateOrphanage = async () => {
     const { latitude, longitude } = position;
 
     const data = new FormData();
 
     data.append('name', name);
     data.append('about', about);
+    data.append('whatsapp', String(whatsapp));
     data.append('instructions', String(instructions));
     data.append('latitude', String(latitude));
     data.append('longitude', String(longitude));
@@ -49,9 +50,14 @@ export default function OrphanageData() {
       } as any);
     })
     
-    api.post('orphanages', data);
+    await api.post('orphanages', data)
+      .then(res => {
+        navigation.navigate('OrphanagesMap');
+      })
+      .catch(err => {
+        alert(err);
+      });
 
-    navigation.navigate('OrphanagesMap');
   }
 
   async function handleSelectImages() {
@@ -85,7 +91,7 @@ export default function OrphanageData() {
       <TextInput style={[styles.input, { height: 110 }]} multiline 
         onChangeText={text => setAbout(text)} />
 
-      <Text style={styles.label}>Whatsapp</Text>
+      <Text style={styles.label}>WhatsApp</Text>
       <TextInput style={styles.input} onChangeText={text => setWhatsapp(text)} />
 
       <Text style={styles.label}>Fotos</Text>

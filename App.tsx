@@ -5,7 +5,7 @@ import {
   useFonts, 
   Nunito_600SemiBold, 
   Nunito_700Bold, 
-  Nunito_800ExtraBold
+  Nunito_800ExtraBold 
 } from '@expo-google-fonts/nunito';
 
 import AppStack from './src/routes/AppStack';

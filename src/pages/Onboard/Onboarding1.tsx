@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { SafeAreaView, Text, Image, StyleSheet, Dimensions, View,  } from 'react-native';
+import { SafeAreaView, Text, Image, StyleSheet, Dimensions, View } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import { Feather } from '@expo/vector-icons';
 
@@ -10,6 +10,10 @@ import { useNavigation } from '@react-navigation/native';
 export default function Onboarding1() {
     const navigation = useNavigation();
 
+    const navigateToNextScreen = () => {
+        navigation.navigate('Onboarding2');
+    }
+
     return (
         <SafeAreaView style={styles.onBoardingView}>
             <Image source={happyEarth} style={styles.earthImage} />
@@ -17,7 +21,7 @@ export default function Onboarding1() {
             <Text style={styles.subHappyText}>Visite orfanatos e mude o dia de muitas crianças.</Text>
             <View style={styles.footer}>
                 <View />
-                <RectButton style={styles.buttonOnboard2} onPress={() => { navigation.navigate('Onboarding2'); }}>
+                <RectButton style={styles.buttonOnboard2} onPress={navigateToNextScreen}>
                     <Feather name="arrow-right" size={30} color="#15C3D6" />
                 </RectButton>
             </View>

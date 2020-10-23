@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { SafeAreaView, Text, Image, StyleSheet, Dimensions, View,  } from 'react-native';
+import { SafeAreaView, Text, Image, StyleSheet, Dimensions, View } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import { Feather } from '@expo/vector-icons';
 

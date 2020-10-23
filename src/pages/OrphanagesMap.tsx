@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Dimensions, Text, SafeAreaView } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import { Feather } from '@expo/vector-icons';
-import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 import MapView, { Marker, Callout, PROVIDER_GOOGLE } from 'react-native-maps';
 
@@ -20,17 +20,7 @@ export default function OrphanagesMap() {
   const [orphanages, setOrphanages] = useState<Orphanages[]>([]);
   const navigation = useNavigation();
 
-  // useEffect(() => {
-  //   api.get('orphanages')
-  //     .then(response => {
-  //       setOrphanages(response.data);
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     })
-  // }, []);
-
-  useFocusEffect(() => {
+  useEffect(() => {
     api.get('orphanages')
       .then(response => {
         setOrphanages(response.data);
@@ -38,7 +28,17 @@ export default function OrphanagesMap() {
       .catch(err => {
         console.log(err);
       })
-  });
+  }, []);
+
+  // useFocusEffect(() => {
+  //   api.get('orphanages')
+  //     .then(response => {
+  //       setOrphanages(response.data);
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     })
+  // });
 
   function handleNavigateToCreateOrphanage() {
     navigation.navigate('SelectMapPosition');

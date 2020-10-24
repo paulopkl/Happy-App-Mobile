@@ -3,11 +3,7 @@
   <img width="1000" height="600" src="/assets/Model github.png" alt="Project logo"></a>
 </p>
 
-<h1 align="center">Projeto: 
-  <a href="https://happy-app-frontend.netlify.app/" target="_blank">[Project]</a>
-</h1>
 <h3 align="center">Happy Frontend web Project.</h3>
-
 
 <div align="center">
 
@@ -64,7 +60,7 @@ Git instado no sistema.
 (Git Commando line installed.)
 
 ```
-git clone https://github.com/paulopkl/Happy-Frontend-Deploy
+git clone https://github.com/paulopkl/Happy-Mobile-Deploy
 ```
 
 ### Instalação (Installing)
@@ -84,13 +80,12 @@ Rodar Servidor web: (Run web server:)
 npm start
 ```
 
-Aprecie o projeto em localhost:3000. (Enjoy the project in localhost:3000.)
+Aprecie o projeto em localhost:19000. (Enjoy the project in localhost:19000.)
 
 ## ⛏️ Construido usando (Built Using) <a name="built_using"></a>
 
-- [ReactJS](https://reactjs.org/) - ReactJS
+- [ReactNative](https://reactnative.dev) - ReactNative
 - [TypeScript](https://www.typescriptlang.org/) - TypeScript
-- [Leaflet](https://leafletjs.com/) - Leaflet
 
 ## ✍️ Autores (Authors) <a name="authors"></a>
 

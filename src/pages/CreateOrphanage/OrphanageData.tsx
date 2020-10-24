@@ -6,6 +6,8 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker';
 import api from '../../services/api';
 
+import { styles } from '../../styles/styles';
+
 interface OrphanageDataRouteParams { 
   position: { 
     latitude: number, 
@@ -28,7 +30,7 @@ export default function OrphanageData() {
   const params = route.params as OrphanageDataRouteParams;
   const position = params.position;
 
-  const handleCreateOrphanage = async () => {
+  const handleCreateOrphanage = () => {
     const { latitude, longitude } = position;
 
     const data = new FormData();
@@ -50,8 +52,9 @@ export default function OrphanageData() {
       } as any);
     })
     
-    await api.post('orphanages', data)
+    api.post('orphanages', data)
       .then(res => {
+        console.log(data);
         navigation.navigate('OrphanagesMap');
       })
       .catch(err => {
@@ -81,8 +84,8 @@ export default function OrphanageData() {
   }
 
   return (
-    <ScrollView style={styles.container} contentContainerStyle={{ padding: 24 }}>
-      <Text style={styles.title}>Dados</Text>
+    <ScrollView style={styles.containerData} contentContainerStyle={{ padding: 24 }}>
+      <Text style={styles.titleData}>Dados</Text>
 
       <Text style={styles.label}>Nome</Text>
       <TextInput style={styles.input} onChangeText={text => setName(text)} />
@@ -108,7 +111,7 @@ export default function OrphanageData() {
         <Feather name="plus" size={24} color="#15B6D6" />
       </TouchableOpacity>
 
-      <Text style={styles.title}>Visitação</Text>
+      <Text style={styles.titleData}>Visitação</Text>
 
       <Text style={styles.label}>Instruções</Text>
       <TextInput style={[styles.input, { height: 110 }]} multiline 
@@ -127,94 +130,9 @@ export default function OrphanageData() {
         />
       </View>
 
-      <RectButton style={styles.nextButton} onPress={handleCreateOrphanage}>
-        <Text style={styles.nextButtonText}>Cadastrar</Text>
+      <RectButton style={styles.nextButtonData} onPress={handleCreateOrphanage}>
+        <Text style={styles.nextButtonTextData}>Cadastrar</Text>
       </RectButton>
     </ScrollView>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-
-  title: {
-    color: '#5c8599',
-    fontSize: 24,
-    fontFamily: 'Nunito_700Bold',
-    marginBottom: 32,
-    paddingBottom: 24,
-    borderBottomWidth: 0.8,
-    borderBottomColor: '#D3E2E6'
-  },
-
-  label: {
-    color: '#8fa7b3',
-    fontFamily: 'Nunito_600SemiBold',
-    marginBottom: 8,
-  },
-
-  comment: {
-    fontSize: 11,
-    color: '#8fa7b3',
-  },
-
-  input: {
-    backgroundColor: '#fff',
-    borderWidth: 1.4,
-    borderColor: '#d3e2e6',
-    borderRadius: 20,
-    height: 56,
-    paddingVertical: 18,
-    paddingHorizontal: 24,
-    marginBottom: 16,
-    textAlignVertical: 'top',
-  },
-
-  uploadedImagesContainer: {
-    flexDirection: 'row',
-  },
-
-  uploadedImage: {
-    width: 64,
-    height: 64,
-    borderRadius: 20,
-    marginBottom: 32,
-    marginRight: 8,
-  },
-
-  imagesInput: {
-    backgroundColor: 'rgba(255, 255, 255, 0.5)',
-    borderStyle: 'dashed',
-    borderColor: '#96D2F0',
-    borderWidth: 1.4,
-    borderRadius: 20,
-    height: 56,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 32,
-  },
-
-  switchContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginTop: 16,
-  },
-
-  nextButton: {
-    backgroundColor: '#15c3d6',
-    borderRadius: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 56,
-    marginTop: 32,
-  },
-
-  nextButtonText: {
-    fontFamily: 'Nunito_800ExtraBold',
-    fontSize: 16,
-    color: '#FFF',
-  }
-})

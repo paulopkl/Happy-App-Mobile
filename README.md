@@ -3,7 +3,7 @@
   <img width="1000" height="600" src="/assets/Model github.png" alt="Project logo"></a>
 </p>
 
-<h3 align="center">Happy Frontend web Project.</h3>
+<h3 align="center">Happy Mobile Project.</h3>
 
 <div align="center">
 
